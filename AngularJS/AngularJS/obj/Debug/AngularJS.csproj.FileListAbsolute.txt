@@ -1,0 +1,4 @@
+F:\My Lab\Angular\AngularJS\AngularJS\bin\AngularJS.dll
+F:\My Lab\Angular\AngularJS\AngularJS\bin\AngularJS.pdb
+F:\My Lab\Angular\AngularJS\AngularJS\obj\Debug\AngularJS.dll
+F:\My Lab\Angular\AngularJS\AngularJS\obj\Debug\AngularJS.pdb
