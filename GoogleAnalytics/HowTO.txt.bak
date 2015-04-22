@@ -1,0 +1,25 @@
+http://blog.analytics-toolkit.com/2014/virtual-pageviews-google-analytics-why-how-when/
+
+http://www.lunametrics.com/blog/2014/09/10/fire-virtual-pageview-google-tag-manager/
+
+ga('send', { 'hitType': 'pageview', 'page': '/widgets/tabs/technical-characteristics/', 'title': 'Widgets | Tabs - Technical Characteristics' });
+
+1. http://localhost/DealerTrackCanada.CreditOnline/COLResponsive.aspx?Token=908ce979-470e-43d3-8c1c-332b3af9632d&Lang=en
+2. http://localhost/DealerTrackCanada.CreditOnline/COLResponsive.aspx?Token=908ce979-470e-43d3-8c1c-332b3af9632d&Lang=en
+3. http://localhost/DealerTrackCanada.CreditOnline/COLResponsive.aspx?Token=908ce979-470e-43d3-8c1c-332b3af9632d&Lang=en
+4. http://localhost/DealerTrackCanada.CreditOnline/COLResponsive.aspx?Token=908ce979-470e-43d3-8c1c-332b3af9632d&Lang=en
+
+
+Question and Ans.....
+
+QA. How to track form progress by each form field.
+
+Step 1: Create js function.
+function trackFormProgress(formElement){
+	if(formElement.value != '') {
+		_gaq.push(['_trackPageView', '/checkout/form/' + formElement.name]);
+	}
+}
+
+Step 2: Call function on onblur of each form elements.
+Example: onblur="trackFormProgress(this);"
