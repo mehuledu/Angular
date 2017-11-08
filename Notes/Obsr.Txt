@@ -53,6 +53,12 @@ export class DataService {
             this.baseurl = DATA_SERVICE_URL;
         }
     }
+    
+    constructor(private http: Http) {
+        this.headers = new Headers({ 'Content-Type': 'application/json' });
+        this.options = new RequestOptions({ headers: this.headers, withCredentials: true });
+        this.init();
+    }
     getPreference() {
         return this.http.get(`${this.baseurl}GetUser`, this.options);
     }
