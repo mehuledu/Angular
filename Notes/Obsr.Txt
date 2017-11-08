@@ -1,0 +1,68 @@
+-- user.service.ts--
+import { Injectable } from '@angular/core';
+import { DataService } from './data.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/observable/of';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/map';
+
+@Injectable()
+export class UserService {
+    private data;
+    private observable: Observable<any>;
+
+    constructor(private dataService: DataService) {
+    }
+
+    getData() {
+        if (this.data) {
+            return Observable.of(this.data);
+        } else if (this.observable) {
+            return this.observable;
+        } else {
+            this.observable = this.dataService.getPreference().map(response => {
+                this.observable = null;
+                if (response.status < 200 || response.status >= 300) {
+                    return "FAILURE";
+                }
+                this.data = response.json();
+                return this.data;
+            }).share();
+            return this.observable;
+        }
+    }
+}
+
+-- data.service.ts --
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/toPromise';
+
+declare var DATA_SERVICE_URL: string;
+
+@Injectable()
+export class DataService {
+    private headers: any;
+    private options: any;
+    private baseurl: string = '../../api/data/';
+
+    init() {
+        if (typeof DATA_SERVICE_URL !== typeof undefined) {
+            this.baseurl = DATA_SERVICE_URL;
+        }
+    }
+    getPreference() {
+        return this.http.get(`${this.baseurl}GetUser`, this.options);
+    }
+}
+
+-- webpack.config.js --
+"plugins": [
+    new webpack.DefinePlugin({ DATA_SERVICE_URL: JSON.stringify("../../api/data/") }),
+    .
+    .
+    .
+    .
+ ]
